@@ -1,12 +1,31 @@
+local config = require('./config')
 local http = require("http")
 local html = [[
   <html>
+    <head>
+      <title>
+]] .. config.title .. [[
+      
+      </title>
+    </head>
     <body>
-      <h1>Hello World</h1>
+      <h1>
+]] .. config.title .. [[
+      
+      </h1>
+      <ul>
+        <li>
+]] .. config.owner .. [[
+        
+        </li>
+        <li>
+]] .. config.URL .. [[
+        
+        </li>
+      </ul>
     </body>
   </html>
 ]]
-
 local function cb(req, res)
   res:writeHead(200, {
     ["Content-Type"] = "text/html",
@@ -16,8 +35,7 @@ local function cb(req, res)
   })
   res:finish(html)
 end
-local server = http.createServer(cb)
 
+local server = http.createServer(cb) 
 server:listen(3000)
-
-print("Server listening at http://localhost:3000/")
+print(html, "Server listening at http://localhost:3000/")
