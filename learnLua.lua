@@ -10,7 +10,7 @@ end
 print("enter a number:")
 a = io.read("*number")
 print(fact(a))
-]]--
+
 
 --quota
 page = [[
@@ -20,8 +20,15 @@ page = [[
 </HEAD>
 <BODY>
 Lua
-[[a text between double brackets]]
+[[a text between double brackets
 </BODY>
 </HTML>
-]]
-io.write(page)
+io.write(page)]]--
+local function fact(n)
+  print(22)
+end
+local function b( ... )
+  print(11)
+  fact()
+end
+print(b(5))
