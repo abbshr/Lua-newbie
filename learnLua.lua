@@ -24,7 +24,7 @@ Lua
 </BODY>
 </HTML>
 io.write(page)]]--
-local function fact(n)
+--[[local function fact(n)
   print(22)
 end
 local function b( ... )
@@ -32,3 +32,14 @@ local function b( ... )
   fact()
 end
 print(b(5))
+]]--
+
+function foo( ... )
+  function bar( ... )
+    print(123)
+  end
+end
+
+foo()
+bar()
+--print(x)
