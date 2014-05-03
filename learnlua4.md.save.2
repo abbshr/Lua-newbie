@@ -1,0 +1,52 @@
+# 协程 （coroutine）
+
+
+创建一个协程：co = coroutine.create(function () end)
+
+	将要运行的代码封装成函数，create返回thread类型的值。
+
+查看协程状态：coroutine.status(co)
+
+	协程三个状态：挂起态、运行态、停止态。
+
+	创建协程之后处于挂起。
+
+变为运行态：coroutine.resume(co)
+
+	当协程执行结束后，状态变为"dead"。
+
+运行态挂起：coroutine.yield()
+
+	co = coroutine.create(function ()
+	  for i = 1, 10 do
+	    print(i)
+	    coroutine.yield()
+	  end
+	end)
+
+Note：当协程已出于dead状态时，如果调用resume将返回false和错误信息。
+
+Note2：如果协同体内部存在错误，lua不会将错误抛出，而是返回给resume函数
+
+lua中的resume和yield可以交换数据：
+
+co = coroutine.create(function (a, b)
+	coroutine.yield(a+b, a-b)
+end)
+
+coroutine.resume(co, 10, 20); -- true 30 -10
+
+yield会返回传递给它的参数给resume调用。
+
+co = coroutine.create(function () 
+	print(coroutine.yield())
+end)
+
+coroutine.resume(co, 45) -- 45
+
+resume传递的额外参数也会作为yield的返回。
+
+当协同代码结束时，主函数返回的值会传给resume调用。
+
+*这种协程为不对称协程*
+
