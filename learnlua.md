@@ -178,7 +178,7 @@ for var1, var2 in ipairs(array) do
 end
 
 -- 遍历table
-for var1, var2 in ipairs(table) do
+for var1, var2 in pairs(table) do
    print(var1, var2)
 end
 
